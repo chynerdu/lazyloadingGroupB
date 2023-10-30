@@ -18,10 +18,10 @@ struct StarDetails: Codable {
     let birth_year: String
     let gender: String
     let url: String
-    let sprites: Sprites
+//    let sprites: Sprites
     
-    struct Sprites: Codable {
-        let front_default: String?
-        let front_female: String?
-    }
+//    struct Sprites: Codable {
+//        let front_default: String?
+//        let front_female: String?
+//    }
 }

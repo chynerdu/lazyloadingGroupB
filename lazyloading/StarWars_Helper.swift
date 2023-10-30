@@ -107,15 +107,15 @@ actor StarwarsAPI_Helper {
         
         var images: [Data] = []
         
-        if let front_default = starData.sprites.front_default {
-            let img = try await StarwarsAPI_Helper.fetchStarImage(urlSring: front_default)
-            images.append(img)
-        }
         
-        if let front_female = starData.sprites.front_female {
-            let img = try await StarwarsAPI_Helper.fetchStarImage(urlSring: front_female)
+            let img = try await StarwarsAPI_Helper.fetchStarImage(urlSring: "https://pngimg.com/d/starwars_PNG27.png")
             images.append(img)
-        }
+        
+        
+       
+//            let img = try await StarwarsAPI_Helper.fetchStarImage(urlSring: "https://pngimg.com/d/starwars_PNG27.png")
+//            images.append(img)
+        
         
         return images
     }

@@ -65,7 +65,7 @@ class StarwarsTableTableViewController: UITableViewController {
         let cellTask = Task {
             do{
                 let peopleDetails = try await StarwarsAPI_Helper.fetchStarDetails(urlString: people.url)
-                let peopleImageData = try await StarwarsAPI_Helper.fetchStarImage(urlSring: peopleDetails.sprites.front_default!)
+                let peopleImageData = try await StarwarsAPI_Helper.fetchStarImage(urlSring: "https://pngimg.com/d/starwars_PNG27.png")
                 
                 cell.starImageView.image = UIImage(data: peopleImageData)
             } catch {
@@ -83,7 +83,7 @@ class StarwarsTableTableViewController: UITableViewController {
         
         if indexPath.row + 1 == peopleList.count - 10 {
             // fetch more pokemone
-            print("fetch more pokemon")
+            print("fetch more people")
             Task {
                 do {
                     let peopledex = try await StarwarsAPI_Helper.fetchStardex(offset: currentOffset)
@@ -95,6 +95,16 @@ class StarwarsTableTableViewController: UITableViewController {
                 }
             }
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        let dst = segue.destination as! StarwarsDetailsViewController
+        // get indexpath of cell that was selected
+        let index = tableView.indexPathForSelectedRow!.row
+        // pass the name and url to the dst
+        dst.people = peopleList[index]
     }
 
     /*

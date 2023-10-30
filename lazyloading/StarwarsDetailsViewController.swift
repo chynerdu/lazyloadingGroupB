@@ -20,6 +20,7 @@ class StarwarsDetailsViewController: UIViewController {
     @IBOutlet weak var genderlabel: UILabel!
     @IBOutlet weak var massLabel: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var imageLabel: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +37,8 @@ class StarwarsDetailsViewController: UIViewController {
         Task {
             do{
                 peopleDetails = try await StarwarsAPI_Helper.fetchStarDetails(urlString: people.url)
+                
+                print(peopleDetails.name)
                 nameLabel.text = String(peopleDetails.name)
                 heightLabel.text = String(peopleDetails.height)
                 massLabel.text = String(peopleDetails.mass)
@@ -44,20 +47,13 @@ class StarwarsDetailsViewController: UIViewController {
                 eyelabel.text = String(peopleDetails.eye_color)
                 genderlabel.text = String(peopleDetails.gender)
                 
-//                var url: String?
-//                if let imageURL = pokeDetails.sprites.front_default {
-//                    url = imageURL
-//                } else if let imageURL = pokeDetails.sprites.front_female {
-//                    url = imageURL
-//                }
+              
+                    let imageData = try await StarwarsAPI_Helper.fetchStarImage(urlSring: "https://pngimg.com/d/starwars_PNG27.png")
+                    
+                    imageLabel.image = UIImage(data: imageData)
+            
                 
-//                if let url = url {
-//                    var pokeImageData = try await PokeAPI_Helper.fetchPokeImage(urlSring: url)
-//                    
-//                    imageView.image = UIImage(data: pokeImageData)
-//                }
-//                
-//                
+                
                 
                 spinner.stopAnimating()
             } catch {
